@@ -1,4 +1,53 @@
 'use strict';
+// Homepage carousel: one timer, manual controls, and explicit pause/resume.
+const heroCarousel=document.querySelector('.hero-carousel');
+if(heroCarousel){
+  const slides=[...heroCarousel.querySelectorAll('.hero-slide')];
+  const dots=[...heroCarousel.querySelectorAll('[data-slide]')];
+  const rotation=heroCarousel.querySelector('.hero-rotation');
+  const motion=matchMedia('(prefers-reduced-motion: reduce)');
+  let current=0;
+  let wantsRotation=!motion.matches;
+  let hovered=false;
+  let focusInside=false;
+  let inView=true;
+  let timer;
+  function schedule(){
+    clearTimeout(timer);
+    const running=wantsRotation&&!motion.matches&&!hovered&&!focusInside&&inView&&!document.hidden&&!document.querySelector('dialog[open]');
+    heroCarousel.dataset.rotation=running?'running':'paused';
+    rotation.classList.toggle('is-paused',!wantsRotation||motion.matches);
+    rotation.disabled=motion.matches;
+    rotation.setAttribute('aria-label',motion.matches?'Rotação automática desativada pela preferência de movimento reduzido':wantsRotation?'Pausar rotação dos banners':'Reproduzir rotação dos banners');
+    rotation.querySelector('span').textContent=wantsRotation&&!motion.matches?'Pausar':'Reproduzir';
+    if(running)timer=setTimeout(()=>{show(current+1,false);schedule();},8000);
+  }
+  function show(index,manual){
+    current=(index+slides.length)%slides.length;
+    slides.forEach((slide,i)=>{slide.classList.toggle('is-active',i===current);slide.setAttribute('aria-hidden',String(i!==current));slide.inert=i!==current;});
+    dots.forEach((dot,i)=>{if(i===current)dot.setAttribute('aria-current','true');else dot.removeAttribute('aria-current');});
+    heroCarousel.querySelector('[data-slide-current]').textContent=String(current+1).padStart(2,'0');
+    if(manual){wantsRotation=false;heroCarousel.querySelector('#banner-status').textContent=`Banner ${slides[current].getAttribute('aria-label')}`;schedule();}
+  }
+  rotation.addEventListener('click',()=>{wantsRotation=!wantsRotation;focusInside=false;schedule();});
+  heroCarousel.querySelector('.hero-previous').addEventListener('click',()=>show(current-1,true));
+  heroCarousel.querySelector('.hero-next').addEventListener('click',()=>show(current+1,true));
+  dots.forEach(dot=>dot.addEventListener('click',()=>show(Number(dot.dataset.slide),true)));
+  heroCarousel.addEventListener('keydown',event=>{if(event.key==='ArrowLeft'||event.key==='ArrowRight'){event.preventDefault();show(current+(event.key==='ArrowRight'?1:-1),true);}});
+  heroCarousel.addEventListener('pointerenter',event=>{if(event.pointerType==='mouse'){hovered=true;schedule();}});
+  heroCarousel.addEventListener('pointerleave',event=>{if(event.pointerType==='mouse'){hovered=false;schedule();}});
+  heroCarousel.addEventListener('focusin',event=>{focusInside=true;if(event.target!==rotation)wantsRotation=false;schedule();});
+  heroCarousel.addEventListener('focusout',event=>{if(!heroCarousel.contains(event.relatedTarget)){focusInside=false;schedule();}});
+  document.addEventListener('visibilitychange',schedule);
+  document.querySelectorAll('.product-dialog').forEach(dialog=>dialog.addEventListener('close',schedule));
+  motion.addEventListener('change',()=>{wantsRotation=false;schedule();});
+  new IntersectionObserver(entries=>{inView=entries[0].isIntersecting;schedule();},{threshold:.15}).observe(heroCarousel);
+  let touchStart=null;
+  heroCarousel.querySelector('.hero-slides').addEventListener('pointerdown',event=>{if(event.pointerType==='touch'&&!event.target.closest('a,button'))touchStart={x:event.clientX,y:event.clientY};},{passive:true});
+  heroCarousel.querySelector('.hero-slides').addEventListener('pointerup',event=>{if(!touchStart)return;const dx=event.clientX-touchStart.x;const dy=event.clientY-touchStart.y;touchStart=null;if(Math.abs(dx)>55&&Math.abs(dx)>Math.abs(dy)*1.5)show(current+(dx<0?1:-1),true);},{passive:true});
+  heroCarousel.querySelector('.hero-slides').addEventListener('pointercancel',()=>{touchStart=null;});
+  schedule();
+}
 const header=document.querySelector('.site-header');
 const menu=document.querySelector('.menu-toggle');
 const nav=document.querySelector('.site-nav');
