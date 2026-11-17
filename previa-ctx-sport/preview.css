@@ -3,3 +3,6 @@
 @media(max-width:600px){.sport-proposal-copy{padding:36px 0}.sport-proposal h1{font-size:clamp(40px,9vw,54px);line-height:1.08}.sport-proposal-description{font-size:15px;line-height:1.85;margin-top:24px}.sport-proposal-actions{gap:22px;margin-top:25px}.sport-proposal-photos{height:340px;gap:5px;grid-template-columns:minmax(0,1fr)}.sport-preview-credit .container{display:block}.sport-preview-credit p{font-size:11px}.sport-preview-credit .preview-back{display:inline-block;margin-top:10px}}
 
 .sport-preview-credit .container{padding-right:84px}
+
+.sport-preview-credit .container{padding-right:245px}
+@media(max-width:600px){.sport-preview-credit .container{padding-right:0;padding-bottom:88px}}
