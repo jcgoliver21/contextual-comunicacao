@@ -4,3 +4,4 @@
 @media(max-width:360px){.press-nav a{font-size:11px;padding:12px 9px;gap:6px}.press-nav a>span{font-size:10px}.press-nav .icon{width:14px}.press-track{grid-auto-columns:91%;gap:15px}.press-card-body{padding:19px}.press-card-body h3{font-size:22px}.press-section-heading h2{font-size:33px}}
 @media(prefers-reduced-motion:reduce){.press-card-open:hover .press-image>img,.press-video-preview:hover>img{transform:none}}
 .press-all-visible .press-controls button,.press-all-visible .press-scroll-hint{display:none}
+.press-nav a>.icon{margin-left:auto}

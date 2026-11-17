@@ -37,3 +37,6 @@
 .brand-universe .division-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
 @media(max-width:960px){.universe .product-grid{grid-template-columns:minmax(0,1fr)}.universe .product-card{max-width:680px;width:100%;margin-inline:auto}.universe .product-brand img{max-width:285px}}
 @media(max-width:820px){.brand-universe .division-grid{grid-template-columns:minmax(0,1fr);gap:22px}}
+
+/* Labels and cards stay unnumbered; counts belong in the navigation controls. */
+.value-item{grid-template-columns:minmax(0,1fr)}.product-top{justify-content:flex-end}.service-detail-top{justify-content:flex-start}.steps article{padding-right:0}
