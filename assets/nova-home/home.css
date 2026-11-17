@@ -29,3 +29,7 @@
 
 /* Lucide: consistent optical weight and clearer service pictograms. */
 .service-icon .icon{width:26px;height:26px;stroke-width:1.65}.about-highlights .icon{stroke-width:1.65}
+
+/* Original product identities on the three product banners. */
+.hero-product-logo{width:180px;height:88px;object-fit:contain;object-position:center;background:#fff;padding:10px 14px;border-radius:2px;margin:0 0 24px}.hero-slide:not(#banner-contextual) .hero-content{padding-top:36px;padding-bottom:40px}.hero-slide:not(#banner-contextual) .hero-title{font-size:clamp(48px,5.1vw,72px);max-width:760px}
+@media(max-width:760px){.hero-product-logo{width:150px;height:74px;padding:8px 12px;margin-bottom:22px}.hero-slide:not(#banner-contextual) .hero-content{padding-top:34px;padding-bottom:40px}}
