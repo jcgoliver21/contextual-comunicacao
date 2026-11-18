@@ -31,8 +31,8 @@
 .service-icon .icon{width:26px;height:26px;stroke-width:1.65}.about-highlights .icon{stroke-width:1.65}
 
 /* Original product identities on the three product banners. */
-.hero-product-logo{width:180px;height:88px;object-fit:contain;object-position:center;background:#fff;padding:10px 14px;border-radius:2px;margin:0 0 24px}.hero-slide:not(#banner-contextual) .hero-content{padding-top:36px;padding-bottom:40px}.hero-slide:not(#banner-contextual) .hero-title{font-size:clamp(48px,5.1vw,72px);max-width:760px}
-@media(max-width:760px){.hero-product-logo{width:150px;height:74px;padding:8px 12px;margin-bottom:22px}.hero-slide:not(#banner-contextual) .hero-content{padding-top:34px;padding-bottom:40px}}
+.hero-product-logo{width:auto;height:88px;max-width:230px;object-fit:contain;object-position:left center;background:transparent;padding:0;border-radius:0;margin:0 0 24px}.hero-slide:not(#banner-contextual) .hero-content{padding-top:36px;padding-bottom:40px}.hero-slide:not(#banner-contextual) .hero-title{font-size:clamp(48px,5.1vw,72px);max-width:760px}
+@media(max-width:760px){.hero-product-logo{width:auto;height:74px;max-width:200px;padding:0;margin-bottom:22px}.hero-slide:not(#banner-contextual) .hero-content{padding-top:34px;padding-bottom:40px}}
 
 /* Give the Universe introduction enough width for natural line breaks. */
 .universe .section-heading>div{min-width:0}.universe .section-heading>p{flex:0 0 310px;width:min(100%,310px);text-wrap:pretty}.universe .section-heading>p span{white-space:nowrap}
